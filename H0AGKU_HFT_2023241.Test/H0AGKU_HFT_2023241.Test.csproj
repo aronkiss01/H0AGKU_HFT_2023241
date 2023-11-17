@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\H0AGKU_HFT_2023241.Logic\H0AGKU_HFT_2023241.Logic.csproj" />
+    <ProjectReference Include="..\H0AGKU_HFT_2023241.Endpoint\H0AGKU_HFT_2023241.Endpoint.csproj" />
     <ProjectReference Include="..\H0AGKU_HFT_2023241.Models\H0AGKU_HFT_2023241.Models.csproj" />
     <ProjectReference Include="..\H0AGKU_HFT_2023241.Repository\H0AGKU_HFT_2023241.Repository.csproj" />
   </ItemGroup>
