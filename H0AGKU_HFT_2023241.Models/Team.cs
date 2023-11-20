@@ -16,6 +16,7 @@ namespace H0AGKU_HFT_2023241.Models
 
         public int ID { get; set; }
         public string Name { get; set; }
+        [ForeignKey(nameof(League))]
         public int LeagueID { get; set; }
         public bool HasJuniorSquad { get; set; }
         [NotMapped]
@@ -24,8 +25,6 @@ namespace H0AGKU_HFT_2023241.Models
         [NotMapped]
         [JsonIgnore]
         public virtual ICollection<Player> Players { get; set; }
-
-
 
         public Team()
         {

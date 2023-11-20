@@ -13,26 +13,29 @@ namespace H0AGKU_HFT_2023241.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Name { get; set; }
+        public int Id { get; set; }
         public int Age { get; set; }
         public int PlayerSalary { get; set; }
         public bool FieldPStick { get; set; }
         public string Position { get; set; }
         [ForeignKey(nameof(Team))]
-        public int ID { get; set; }
+        public int TeamID { get; set; }
         [NotMapped]
         public virtual Team Team { get; set; }
         public Player()
         {
             
         }
-        public Player(string name, int age, int iD, string position, int playerSalary, bool fieldPStick)
+        public Player(string name, int id, int age, int playerSalary, bool fieldPStick, string position, int teamID)
         {
             Name = name;
+            Id = id;
             Age = age;
-            ID = iD;
-            Position = position;
             PlayerSalary = playerSalary;
             FieldPStick = fieldPStick;
+            Position = position;
+            TeamID = teamID;
+            
         }
     }
 }
