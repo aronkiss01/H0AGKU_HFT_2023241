@@ -5,6 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="IceHockeyLeagues.mdf" />
+    <None Remove="IceHockeyLeagues_log.ldf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="IceHockeyLeagues.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IceHockeyLeagues_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\H0AGKU_HFT_2023241.Models\H0AGKU_HFT_2023241.Models.csproj" />
   </ItemGroup>
 
