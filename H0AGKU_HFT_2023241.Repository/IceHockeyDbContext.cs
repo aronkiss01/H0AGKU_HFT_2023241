@@ -14,6 +14,15 @@ namespace H0AGKU_HFT_2023241.Repository
         {
             this.Database.EnsureCreated();      
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseInMemoryDatabase("ihdb").UseLazyLoadingProxies();
+            base.OnConfiguring(optionsBuilder);
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
 
     }
 }
