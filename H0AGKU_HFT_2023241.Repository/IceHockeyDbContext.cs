@@ -21,6 +21,17 @@ namespace H0AGKU_HFT_2023241.Repository
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Team>()
+                .HasOne(t => t.League)
+                .WithMany(t=>t.Teams)
+                .HasForeignKey(t=>t.LeagueID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Player>()
+                .HasOne(t => t.Team)
+                .WithMany(t => t.Players)
+                .HasForeignKey(t => t.TeamID)
+                .OnDelete(DeleteBehavior.Cascade);
             base.OnModelCreating(modelBuilder);
         }
 
