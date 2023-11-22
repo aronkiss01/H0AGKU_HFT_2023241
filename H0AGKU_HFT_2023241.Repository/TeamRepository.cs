@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace H0AGKU_HFT_2023241.Repository
 {
-    public class LeagueRepository : Repository<League>, IRepository<League>
+    public class TeamRepository : Repository<Team>, IRepository<Team>
     {
-        public LeagueRepository(IceHockeyDbContext ctx) : base(ctx) { }
-        public override League Read(int id)
+        public TeamRepository(IceHockeyDbContext ctx):base(ctx) { }               
+        
+        public override Team Read(int id)
         {
-            return this.ctx.Leagues.First(x => x.Id == id);
+           return this.ctx.Teams.First(t=>t.ID==id);
         }
 
-        public override void Update(League item)
+        public override void Update(Team item)
         {
-            var old = Read(item.Id);
+            var old = Read(item.ID);
             foreach (var x in old.GetType().GetProperties())
             {
                 if (x.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
@@ -27,6 +28,6 @@ namespace H0AGKU_HFT_2023241.Repository
             }
             ctx.SaveChanges();
         }
-        
+            
     }
 }
