@@ -21,19 +21,45 @@ namespace H0AGKU_HFT_2023241.Test
             mockLeagueRepository = new Mock<IRepository<League>>();
             mockLeagueRepository.Setup(x => x.ReadAll()).Returns(new List<League>()
             {
-                new League(10, "Liga X", "USA", true),
-                new League(11, "Liga Y", "USA", true),
-                new League(12, "Liga Z", "USA", false)
+                new League(1, "Liga X", "USA", true),
+                new League(2, "Liga Y", "USA", true),
+                new League(3, "Liga Z", "USA", false)
             }.AsQueryable());
             leagueLogic = new LeagueLogic(mockLeagueRepository.Object);
         }
         [Test]
-        public void CorrectCreateTest() 
+        public void CorrectCreateTest()
         {
-            var cct = new League(13, " Liga", "USA", false);
+            var cct = new League(4, " Liga", "USA", false);
             leagueLogic.Create(cct);
-            mockLeagueRepository.Verify(a => a.Create(cct), Times.Once());
+            mockLeagueRepository.Verify(x => x.Create(cct), Times.Once());
         }
+        [Test]
+        public void IncorrectCreateTest()
+        {
+            var ict = new League(-7, "Kalinka League", "Russia", false);
+            try
+            {
+                leagueLogic.Create(ict);
+            }
+            catch (ArgumentException)
+            {
+            }
+            mockLeagueRepository.Verify(x => x.Create(ict), Times.Never());
+        }
+        [Test]
+        public void ReadLeagueTest()
+        {
+            try
+            {
 
+                leagueLogic.Read(2);
+            }
+            catch
+            {
+
+            }
+            mockLeagueRepository.Verify(x=>x.Read(2), Times.Once());
+        }
     }
 }
