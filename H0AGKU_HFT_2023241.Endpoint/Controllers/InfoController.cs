@@ -19,22 +19,22 @@ namespace H0AGKU_HFT_2023241.Endpoint.Controllers
             this.teamlogic = teamlogic;
         }
         [HttpGet("{age}")]
-        public IEnumerable<Player> GetPlayersYoungerThanX(int age)
+        public IEnumerable<Player> PlayersYoungerThanX(int age)
         {
             return this.playerLogic.GetPlayersYoungerThanX(age);
         }
         [HttpGet]
-        public int GetYoungsterSalaryInfo()
+        public int SalaryInfoYoung()
         {
             return this.playerLogic.GetYoungsterSalaryInfo();
         }
         [HttpGet]
-        public int GetYoungestPlayerAge()
+        public int YoungestPlayerAge()
         {
             return this.playerLogic.GetYoungestPlayerAge();
         }
         [HttpGet("{id}")]
-        public double GetAverageSalaryInTeam(int id)
+        public double AverageSalaryInTeams(int id)
         {
             return this.teamlogic.GetAverageSalaryInTeam(id);
         }

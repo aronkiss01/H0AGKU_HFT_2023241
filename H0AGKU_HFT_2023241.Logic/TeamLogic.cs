@@ -38,8 +38,8 @@ namespace H0AGKU_HFT_2023241.Logic
            .ReadAll()
            .FirstOrDefault(t => t.ID == TeamId);
             return team.Players
-            .Select(p => p.PlayerSalary)
-            .Average();
+           .Select(p => p.PlayerSalary)
+           .Average();
         }
 
         public Team Read(int Id)
