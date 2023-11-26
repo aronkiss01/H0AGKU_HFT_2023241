@@ -78,6 +78,38 @@ public class RestService
         }
         return items;
     }
+    public T GetSingle<T>(string endP)
+    {
+        T item=default(T);
+        HttpResponseMessage response = client.GetAsync(endP).GetAwaiter().GetResult();
+        if (response.IsSuccessStatusCode)
+        {
+            item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+        }
+        else
+        {
+            var error = response.Content.ReadAsAsync<RestException>().GetAwaiter().GetResult();
+            throw new ArgumentException(error.ExceptionMsg);
+        }
+        return item;
+    }
+    public T Get<T>(int Id, string endP)
+    {
+        T item = default(T);
+        HttpResponseMessage response = client.GetAsync(endP + "/" + Id.ToString()).GetAwaiter().GetResult();
+        if (response.IsSuccessStatusCode)
+        {
+            item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+        }
+        else
+        {
+            var error = response.Content.ReadAsAsync<RestException>().GetAwaiter().GetResult();
+            throw new ArgumentException(error.ExceptionMsg);
+        }
+        return item;
+    }
+
+
 
 }
 
