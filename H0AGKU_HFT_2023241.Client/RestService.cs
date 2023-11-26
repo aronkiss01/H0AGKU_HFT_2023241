@@ -108,6 +108,47 @@ public class RestService
         }
         return item;
     }
+    public void Post<T>(T item, string endP)
+    {
+        HttpResponseMessage response = client.PostAsJsonAsync(endP, item).GetAwaiter().GetResult();
+
+
+        if (response.IsSuccessStatusCode!=true)
+        {
+            var error = response.Content.ReadAsAsync<RestException>().GetAwaiter().GetResult();
+            throw new ArgumentException(error.ExceptionMsg);
+        }
+        response.EnsureSuccessStatusCode();
+    }
+
+    public void Delete(int id, string endP)
+    {
+        HttpResponseMessage response = client.DeleteAsync(endP + "/" + id.ToString()).GetAwaiter().GetResult();
+
+
+        if (response.IsSuccessStatusCode!=true)
+        {
+            var error = response.Content.ReadAsAsync<RestException>().GetAwaiter().GetResult();
+            throw new ArgumentException(error.ExceptionMsg);
+        }
+
+        response.EnsureSuccessStatusCode();
+    }
+
+    public void Put<T>(T item, string endpoint)
+    {
+        HttpResponseMessage response = client.PutAsJsonAsync(endpoint, item).GetAwaiter().GetResult();
+
+
+        if (response.IsSuccessStatusCode != true)
+        {
+            var error = response.Content.ReadAsAsync<RestException>().GetAwaiter().GetResult();
+            throw new ArgumentException(error.ExceptionMsg);
+        }
+
+        response.EnsureSuccessStatusCode();
+    }
+
 
 
 
