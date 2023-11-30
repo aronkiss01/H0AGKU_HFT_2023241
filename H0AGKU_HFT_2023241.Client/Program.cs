@@ -1,5 +1,7 @@
-﻿using H0AGKU_HFT_2023241.Models;
+﻿using ConsoleTools;
+using H0AGKU_HFT_2023241.Models;
 using System;
+using System.Collections.Generic;
 
 namespace H0AGKU_HFT_2023241.Client
 {
@@ -9,7 +11,39 @@ namespace H0AGKU_HFT_2023241.Client
 
         static void Main(string[] args)
         {
+            RestService = new RestService("http://localhost:62823/", "league");
+            var leagueSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("List", () => List("League"))
+                .Add("Create", () => Create("League"))
+                .Add("Delete", () => Delete("League"))
+                .Add("Update", () => Update("League"))
+                .Add("Junior League Info", () => JuniorLeagueInfo("League"))
+                .Add("Exit", ConsoleMenu.Close);
 
+            var teamSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("List", () => List("Team"))
+                .Add("Create", () => Create("Team"))
+                .Add("Delete", () => Delete("Team"))
+                .Add("Update", () => Update("Team"))
+                .Add("Average salary", () => AverageSalary("Team"))
+                .Add("Exit", ConsoleMenu.Close);
+
+            var playerSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("List", () => List("Player"))
+                .Add("Create", () => Create("Player"))
+                .Add("Delete", () => Delete("Player"))
+                .Add("Update", () => Update("Player"))
+                .Add("Younger than", () => YoungerThan("Player"))
+                .Add("Young players salary info", () => YoungSalary("Player"))
+                .Add("Youngest player age", () => YoungestPlayerAge("Player"))
+                .Add("Exit", ConsoleMenu.Close);
+            var menu = new ConsoleMenu(args, level: 0)
+                .Add("Leagues", () => leagueSubMenu.Show())
+                .Add("Teams", () => teamSubMenu.Show())
+                .Add("Players", () => playerSubMenu.Show())
+                .Add("Exit", ConsoleMenu.Close);
+
+            menu.Show();
         }
         static void Create(string entity)
         {
@@ -32,7 +66,7 @@ namespace H0AGKU_HFT_2023241.Client
                 int PLage = int.Parse(Console.ReadLine());
                 Console.Write("Player position: ");
                 string Ppos = Console.ReadLine();
-                Console.Write("Is player right footed?(true/false): ");
+                Console.Write("Does Player use FieldStick ? (true/false): ");
                 bool FStick = bool.Parse(Console.ReadLine());
                 Console.Write("Player salary: ");
                 int Psalary = int.Parse(Console.ReadLine());
@@ -46,7 +80,7 @@ namespace H0AGKU_HFT_2023241.Client
                 string Tname = Console.ReadLine();
                 Console.Write("Team league ID: ");
                 int TLId = int.Parse(Console.ReadLine());
-                Console.Write("Team has youth squad?(true/false): ");
+                Console.Write("Team has junior squad?(true/false): ");
                 bool juniorSquad = bool.Parse(Console.ReadLine());
                 RestService.Post(new Team() { Name = Tname, LeagueID = TLId, HasJuniorSquad = juniorSquad }, "team");
             }
@@ -87,6 +121,96 @@ namespace H0AGKU_HFT_2023241.Client
                 RestService.Put(p, "player");
             }
         }
-        
+        static void Delete(string entity)
+        {
+            if (entity == "League")
+            {
+                Console.WriteLine("League ID to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                RestService.Delete(id, "league");
+            }
+            else if (entity == "Team")
+            {
+                Console.WriteLine("Team ID to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                RestService.Delete(id, "team");
+            }
+            else if (entity == "Player")
+            {
+                Console.WriteLine("Player ID to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                RestService.Delete(id, "player");
+            }
+        }
+        static void YoungerThan(string entity)
+        {
+            Console.WriteLine("Players under age: ");
+            int age = int.Parse(Console.ReadLine());
+            IEnumerable<Player> youngplayers = RestService.Get<Player>("PlusInfo/GetPlayersYoungerThan/" + age);
+            foreach (var item in youngplayers)
+            {
+                Console.WriteLine(item.Name);
+            }
+            Console.ReadLine();
+        }
+        static void YoungSalary(string entity)
+        {
+            int x = RestService.GetSingle<int>("PlusInfo/GetYoungsterSalaryInfo");
+            Console.WriteLine("U20 Players salary sum: " + x);
+            Console.ReadLine();
+        }
+        static void YoungestPlayerAge(string entity)
+        {
+            int x = RestService.GetSingle<int>("PlusInfo/GetYoungestPlayerAge");
+            Console.WriteLine("The youngest player age is: " + x);
+            Console.ReadLine();
+        }
+        static void AverageSalary(string entity)
+        {
+            Console.WriteLine("Team ID: ");
+            int id = int.Parse(Console.ReadLine());
+            double x = RestService.GetSingle<double>("PlusInfo/AverageSalary/" + id);
+            Console.WriteLine(x);
+            Console.ReadKey();
+        }
+        static void JuniorLeagueInfo(string entity)
+        {
+            var junior = RestService.Get<JuniorLeagueInfo>("JnuiorLeagueInfo/GetYSI");
+            foreach (var item in junior)
+            {
+                Console.WriteLine("League ID: " + item.LeagueId);
+                Console.WriteLine("Youth Squad Counter: " + item.JuniorSquadsInLeague);
+            }
+            Console.ReadKey();
+        }
+        static void List(string entity)
+        {
+            if (entity == "League")
+            {
+                List<League> leagues = RestService.Get<League>("league");
+                foreach (var item in leagues)
+                {
+                    Console.WriteLine("(" + item.Id + ")" + item.LeagueName);
+                }
+            }
+            else if (entity == "Player")
+            {
+                List<Player> leagues = RestService.Get<Player>("player");
+                foreach (var item in leagues)
+                {
+                    Console.WriteLine("(" + item.Id + ")" + item.Name);
+                }
+            }
+            else if (entity == "Team")
+            {
+                List<Team> leagues = RestService.Get<Team>("team");
+                foreach (var item in leagues)
+                {
+                    Console.WriteLine("(" + item.LeagueID + ")" + item.Name);
+                }
+            }
+            Console.ReadLine();
+        }
+
     }
 }
