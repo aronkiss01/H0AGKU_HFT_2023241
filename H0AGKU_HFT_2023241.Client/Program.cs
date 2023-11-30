@@ -7,6 +7,10 @@ namespace H0AGKU_HFT_2023241.Client
     {
         static RestService RestService;
 
+        static void Main(string[] args)
+        {
+
+        }
         static void Create(string entity)
         {
             if (entity == "League")
@@ -49,9 +53,40 @@ namespace H0AGKU_HFT_2023241.Client
             Console.ReadLine();
 
         }
-        static void Main(string[] args)
+        static void Update(string entity)
         {
-            
+            if (entity == "League")
+            {
+                Console.WriteLine("Enter the League ID to modify: ");
+                int id = int.Parse(Console.ReadLine());
+                League league = RestService.Get<League>(id, "league");
+                Console.WriteLine($"Old name:{league.LeagueName} new name: ");
+                string newName = Console.ReadLine();
+                league.LeagueName = newName;
+                RestService.Put(league, "league");
+
+            }
+            else if (entity == "Team")
+            {
+                Console.WriteLine("Team ID to modify: ");
+                int id = int.Parse(Console.ReadLine());
+                Team t = RestService.Get<Team>(id, "team");
+                Console.WriteLine($"Old name:{t.Name} new name: ");
+                string newName = Console.ReadLine();
+                t.Name = newName;
+                RestService.Put(t, "team");
+            }
+            else if (entity == "Player")
+            {
+                Console.WriteLine("Enter the Player ID to modify: ");
+                int id = int.Parse(Console.ReadLine());
+                Player p = RestService.Get<Player>(id, "player");
+                Console.WriteLine($"Old name:{p.Name} new name: ");
+                string newName = Console.ReadLine();
+                p.Name = newName;
+                RestService.Put(p, "player");
+            }
         }
+        
     }
 }
