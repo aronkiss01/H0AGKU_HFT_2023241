@@ -12,21 +12,21 @@ namespace H0AGKU_HFT_2023241.Repository
         public LeagueRepository(IceHockeyDbContext ctx) : base(ctx) { }
         public override League Read(int id)
         {
-            return this.ctx.Leagues.First(x => x.Id == id);
+            return this.Context.Leagues.First(x => x.Id == id);
         }
 
         public override void Update(League item)
         {
             var old = Read(item.Id);
-            foreach (var x in old.GetType().GetProperties())
+            foreach (var p in old.GetType().GetProperties())
             {
-                if (x.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
+                if (p.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
                 {
-                    x.SetValue(old, x.GetValue(item));
+                    p.SetValue(old, p.GetValue(item));
                 }
             }
-            ctx.SaveChanges();
+            Context.SaveChanges();
         }
-        
+
     }
 }

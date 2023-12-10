@@ -14,6 +14,6 @@ namespace H0AGKU_HFT_2023241.Logic
         void Update(League item);
         void Delete(int Id);
         IEnumerable<League> ReadAll();
-        IEnumerable<JuniorLeagueInfo> GetJuniorLeagueInfos();
+        IEnumerable<JuniorLeagueInfo> GetJuniorLeagueInfo();
     }
 }

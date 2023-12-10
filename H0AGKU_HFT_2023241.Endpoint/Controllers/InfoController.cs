@@ -10,33 +10,33 @@ namespace H0AGKU_HFT_2023241.Endpoint.Controllers
     [ApiController]
     public class InfoController:ControllerBase
     {
-        IPlayerLogic playerLogic;
-        ITeamLogic teamlogic;
 
-        public InfoController(IPlayerLogic playerLogic, ITeamLogic teamlogic)
+        IPlayerLogic ipl;
+        ITeamLogic itl;
+        public InfoController(IPlayerLogic ipl, ITeamLogic itl)
         {
-            this.playerLogic = playerLogic;
-            this.teamlogic = teamlogic;
+            this.ipl = ipl;
+            this.itl = itl;
         }
         [HttpGet("{age}")]
-        public IEnumerable<Player> PlayersYoungerThan(int age)
+        public IEnumerable<Player> GetPlayersYoungerThanX(int age)
         {
-            return this.playerLogic.GetPlayersYoungerThanX(age);
+            return this.ipl.GetPlayersYoungerThanX(age);
         }
         [HttpGet]
-        public int SalaryInfoYoung()
+        public int GetYoungsterSalaryInfo()
         {
-            return this.playerLogic.GetYoungsterSalaryInfo();
+            return this.ipl.GetYoungsterSalaryInfo();
         }
         [HttpGet]
-        public int YoungestPlayerAge()
+        public int GetYoungestPlayerAge()
         {
-            return this.playerLogic.GetYoungestPlayerAge();
+            return this.ipl.GetYoungestPlayerAge();
         }
-        [HttpGet("{id}")]
-        public double AverageSalaryInTeams(int id)
+        [HttpGet("{tsId}")]
+        public double AverageSalary(int tsId)
         {
-            return this.teamlogic.GetAverageSalaryInTeam(id);
+            return this.itl.GetAverageSalaryInTeam(tsId);
         }
     }
 }

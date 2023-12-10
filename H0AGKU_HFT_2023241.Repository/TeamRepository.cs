@@ -13,21 +13,21 @@ namespace H0AGKU_HFT_2023241.Repository
         
         public override Team Read(int id)
         {
-           return this.ctx.Teams.First(t=>t.ID==id);
+           return this.Context.Teams.First(t=>t.ID==id);
         }
 
         public override void Update(Team item)
         {
             var old = Read(item.ID);
-            foreach (var x in old.GetType().GetProperties())
+            foreach (var p in old.GetType().GetProperties())
             {
-                if (x.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
+                if (p.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
                 {
-                    x.SetValue(old, x.GetValue(item));
+                    p.SetValue(old, p.GetValue(item));
                 }
             }
-            ctx.SaveChanges();
+            Context.SaveChanges();
         }
-            
+
     }
 }

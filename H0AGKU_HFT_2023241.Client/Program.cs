@@ -146,7 +146,7 @@ namespace H0AGKU_HFT_2023241.Client
         {
             Console.WriteLine("Players under age: ");
             int age = int.Parse(Console.ReadLine());
-            IEnumerable<Player> youngplayers = RestService.Get<Player>("PlusInfo/GetPlayersYoungerThan/" + age);
+            IEnumerable<Player> youngplayers = RestService.Get<Player>("Info/GetPlayersYoungerThanX/" + age);
             foreach (var item in youngplayers)
             {
                 Console.WriteLine(item.Name);
@@ -155,13 +155,13 @@ namespace H0AGKU_HFT_2023241.Client
         }
         static void YoungSalary(string entity)
         {
-            int x = RestService.GetSingle<int>("PlusInfo/GetYoungsterSalaryInfo");
+            int x = RestService.GetSingle<int>("Info/GetYoungsterSalaryInfo");
             Console.WriteLine("U20 Players salary sum: " + x);
             Console.ReadLine();
         }
         static void YoungestPlayerAge(string entity)
         {
-            int x = RestService.GetSingle<int>("PlusInfo/GetYoungestPlayerAge");
+            int x = RestService.GetSingle<int>("Info/GetYoungestPlayerAge");
             Console.WriteLine("The youngest player age is: " + x);
             Console.ReadLine();
         }
@@ -169,17 +169,17 @@ namespace H0AGKU_HFT_2023241.Client
         {
             Console.WriteLine("Team ID: ");
             int id = int.Parse(Console.ReadLine());
-            double x = RestService.GetSingle<double>("PlusInfo/AverageSalary/" + id);
+            double x = RestService.GetSingle<double>("Info/AverageSalary/" + id);
             Console.WriteLine(x);
             Console.ReadKey();
         }
         static void JuniorLeagueInfo(string entity)
         {
-            var junior = RestService.Get<JuniorLeagueInfo>("JnuiorLeagueInfo/GetYSI");
+            var junior = RestService.Get<JuniorLeagueInfo>("JuniorLeague/GetJuniorLeagueInfo");
             foreach (var item in junior)
             {
                 Console.WriteLine("League ID: " + item.LeagueId);
-                Console.WriteLine("Youth Squad Counter: " + item.JuniorSquadsInLeague);
+                Console.WriteLine("Junior Squad Counter: " + item.JuniorSquadsInLeague);
             }
             Console.ReadKey();
         }

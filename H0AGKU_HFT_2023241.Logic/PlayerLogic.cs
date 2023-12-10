@@ -19,55 +19,49 @@ namespace H0AGKU_HFT_2023241.Logic
         {
             if (item.Id < 0)
             {
-                throw new ArgumentException("Player ID must be positive number!");
+                throw new ArgumentException("The player ID cannot be negative!");
             }
             else
             {
                 this.repository.Create(item);
             }
         }
-
-        public void Delete(int Id)
+        public Player Read(int id)
         {
-            this.repository.Delete(Id);
-        }
-
-        public IEnumerable<Player> GetPlayersYoungerThanX(int x)
-        {
-            return repository.ReadAll().Where(t => t.Age < x);
-        }
-
-        public int GetYoungestPlayerAge()
-        {
-            return repository.ReadAll()
-                .OrderBy(t => t.Age).First().Age;
-        }
-
-        public int GetYoungsterSalaryInfo()
-        {
-            return repository.ReadAll()
-               .Where(t => t.Age > 20)
-               .Sum(t => t.PlayerSalary);
-        }
-
-        public Player Read(int Id)
-        {
-            var x = this.repository.Read(Id);
-            if (x.Equals(null))
+            var p = this.repository.Read(id);
+            if (p == null)
             {
-                throw new ArgumentException("Player with this Id is not exists");
+                throw new ArgumentException("Player not exists");
             }
-            return x;
+            return p;
         }
-
+        public void Delete(int id)
+        {
+            this.repository.Delete(id);
+        }
         public IEnumerable<Player> ReadAll()
         {
             return this.repository.ReadAll();
         }
-
         public void Update(Player item)
         {
             this.repository.Update(item);
+        }
+        public IEnumerable<Player> GetPlayersYoungerThanX(int x)
+        {
+            return repository.ReadAll()
+                .Where(t => t.Age < x);
+        }
+        public int GetYoungsterSalaryInfo()
+        {
+            return repository.ReadAll()
+                .Where(t => t.Age > 20)
+                .Sum(t => t.PlayerSalary);
+        }
+        public int GetYoungestPlayerAge()
+        {
+            return repository.ReadAll()
+                .OrderBy(t => t.Age).First().Age;
         }
     }
 }

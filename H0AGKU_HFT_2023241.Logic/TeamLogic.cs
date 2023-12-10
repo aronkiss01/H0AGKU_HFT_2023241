@@ -19,47 +19,42 @@ namespace H0AGKU_HFT_2023241.Logic
         {
             if (item.ID < 0)
             {
-                throw new ArgumentException("Team ID must be positive number!");
+                throw new ArgumentException("The team ID cannot be negative!");
             }
             else
             {
                 this.repository.Create(item);
             }
         }
-
-        public void Delete(int Id)
+        public Team Read(int id)
         {
-           this.repository.Delete(Id);
-        }
-
-        public double GetAverageSalaryInTeam(int TeamId)
-        {
-            var team = this.repository
-           .ReadAll()
-           .FirstOrDefault(t => t.ID == TeamId);
-            return team.Players
-           .Select(p => p.PlayerSalary)
-           .Average();
-        }
-
-        public Team Read(int Id)
-        {
-            var x = this.repository.Read(Id);
-            if (x.Equals(null))
+            var p = this.repository.Read(id);
+            if (p == null)
             {
-                throw new ArgumentException("Team with this Id is not exists");
+                throw new ArgumentException("Team not exists!");
             }
-            return x;
+            return p;
         }
-
+        public void Delete(int id)
+        {
+            this.repository.Delete(id);
+        }
         public IEnumerable<Team> ReadAll()
         {
             return this.repository.ReadAll();
         }
-
         public void Update(Team item)
         {
             this.repository.Update(item);
+        }
+        public double GetAverageSalaryInTeam(int teamId)
+        {
+            var team = this.repository
+            .ReadAll()
+            .FirstOrDefault(t => t.ID == teamId);
+            return team.Players
+            .Select(p => p.PlayerSalary)
+            .Average();
         }
     }
 }

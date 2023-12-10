@@ -10,7 +10,6 @@ namespace H0AGKU_HFT_2023241.Logic
     public class LeagueLogic : ILeagueLogic
     {
         IRepository<League> repository;
-
         public LeagueLogic(IRepository<League> repository)
         {
             this.repository = repository;
@@ -19,45 +18,47 @@ namespace H0AGKU_HFT_2023241.Logic
         {
             if (item.Id < 0)
             {
-                throw new ArgumentException("League ID must be positive number!");
+                throw new ArgumentException("The league ID cannot be negative!");
             }
-            else 
-            { 
+            else
+            {
                 this.repository.Create(item);
             }
         }
-
-        public void Delete(int Id)
+        public League Read(int id)
         {
-            this.repository.Delete(Id);
-        }
-
-        public IEnumerable<JuniorLeagueInfo> GetJuniorLeagueInfos()
-        {
-            return this.repository.ReadAll()
-                .SelectMany(x => x.Teams)
-                .GroupBy(x => x.LeagueID)
-                .Select(g => new JuniorLeagueInfo() {LeagueId=g.Key,JuniorSquadsInLeague=g.Count(x=> x.HasJuniorSquad)});
-        }
-
-        public League Read(int Id)
-        {
-            var x=this.repository.Read(Id);
-            if (x.Equals(null))
+            var p = this.repository.Read(id);
+            if (p == null)
             {
-                throw new ArgumentException("Player with this Id is not exists");
+                throw new ArgumentException("Player not exists");
             }
-            return x;
+            return p;
         }
-
+        public void Delete(int id)
+        {
+            this.repository.Delete(id);
+        }
         public IEnumerable<League> ReadAll()
         {
             return this.repository.ReadAll();
         }
-
         public void Update(League item)
         {
-           this.repository.Update(item);
+            this.repository.Update(item);
+        }
+        public IEnumerable<JuniorLeagueInfo> GetJuniorLeagueInfo()
+        {
+
+            return this.repository.ReadAll()
+            .SelectMany(t => t.Teams)
+            .GroupBy(t => t.LeagueID)
+            .Select(g => new JuniorLeagueInfo()
+            {
+                LeagueId = g.Key,
+                JuniorSquadsInLeague=g.Count(t=>t.HasJuniorSquad) 
+            });
+
         }
     }
 }
+

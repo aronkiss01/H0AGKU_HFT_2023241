@@ -12,8 +12,9 @@ namespace H0AGKU_HFT_2023241.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Name { get; set; }
         public int Id { get; set; }
+        public string Name { get; set; }
+       
         public int Age { get; set; }
         public int PlayerSalary { get; set; }
         public bool FieldPStick { get; set; }

@@ -32,10 +32,10 @@ namespace H0AGKU_HFT_2023241.Models
     }
     public class JuniorLeagueInfo
     {
+        public JuniorLeagueInfo() { }
+
         public int LeagueId { get; set; }
         public int JuniorSquadsInLeague { get; set; }
-
-        public JuniorLeagueInfo() { }
 
         public JuniorLeagueInfo(int leagueId, int juniorSquadsInLeague)
         {

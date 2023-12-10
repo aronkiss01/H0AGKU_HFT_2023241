@@ -15,20 +15,20 @@ namespace H0AGKU_HFT_2023241.Repository
         }
         public override Player Read(int id)
         {
-            return this.ctx.Players.First(p => p.Id == id);
+            return this.Context.Players.First(p => p.Id == id);
         }
 
         public override void Update(Player item)
         {
             var old = Read(item.Id);
-            foreach (var x in old.GetType().GetProperties())
+            foreach (var p in old.GetType().GetProperties())
             {
-                if (x.GetAccessors().FirstOrDefault(t=>t.IsVirtual)==null)
+                if (p.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
                 {
-                    x.SetValue(old, x.GetValue(item));
+                    p.SetValue(old, p.GetValue(item));
                 }
             }
-            ctx.SaveChanges();
+            Context.SaveChanges();
         }
     }
 }

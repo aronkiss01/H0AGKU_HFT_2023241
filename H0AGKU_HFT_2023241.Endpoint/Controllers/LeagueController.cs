@@ -11,32 +11,37 @@ namespace H0AGKU_HFT_2023241.Endpoint.Controllers
     {
         ILeagueLogic leaguelogic;
 
-        public LeagueController(ILeagueLogic leaguelogic)
+        public LeagueController(ILeagueLogic logic)
         {
-            this.leaguelogic = leaguelogic;
+            this.leaguelogic = logic;
         }
+
         [HttpGet]
         public IEnumerable<League> ReadAll()
         {
             return this.leaguelogic.ReadAll();
         }
+
         [HttpGet("{id}")]
-        public League Read(int id) 
-        { 
+        public League Read(int id)
+        {
             return this.leaguelogic.Read(id);
         }
+
         [HttpPost]
         public void Create([FromBody] League value)
         {
             this.leaguelogic.Create(value);
         }
+
         [HttpPut]
-        public void Update([FromBody] League value) 
-        { 
+        public void Update([FromBody] League value)
+        {
             this.leaguelogic.Update(value);
         }
+
         [HttpDelete("{id}")]
-        public void Delete(int id) 
+        public void Delete(int id)
         {
             this.leaguelogic.Delete(id);
         }

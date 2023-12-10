@@ -18,9 +18,9 @@ namespace H0AGKU_HFT_2023241.Endpoint.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<JuniorLeagueInfo> GetJuniorLeagueInfos()
+        public IEnumerable<JuniorLeagueInfo> GetJuniorLeagueInfo()
         {
-            return jjlogic.GetJuniorLeagueInfos();
+            return jjlogic.GetJuniorLeagueInfo();
         }
     }
 }

@@ -38,7 +38,10 @@ namespace H0AGKU_HFT_2023241.Endpoint
             services.AddTransient<ILeagueLogic, LeagueLogic>();
 
             services.AddControllers();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "H0AGKU_HFT_2023241.Endpoint", Version = "v1" }); });
+            services.AddSwaggerGen(c => 
+            { 
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "H0AGKU_HFT_2023241.Endpoint", Version = "v1" }); 
+            });
             
         }
 

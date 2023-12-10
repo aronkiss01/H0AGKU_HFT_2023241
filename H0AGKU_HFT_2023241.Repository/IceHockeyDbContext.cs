@@ -55,7 +55,7 @@ namespace H0AGKU_HFT_2023241.Repository
                 new Team(){ID=8,Name="Eisbären Berlin",LeagueID=3,HasJuniorSquad=false},
                 new Team(){ID=9,Name="EHC Red Bull München",LeagueID=3,HasJuniorSquad=true}
             };
-            modelBuilder.Entity<Team>().HasData(teams);
+            
 
             var players = new List<Player>()
             {
@@ -66,6 +66,8 @@ namespace H0AGKU_HFT_2023241.Repository
                 new Player(){Name="Hári János",Id=5,Age=31,PlayerSalary=1970000,Position="Midfilder",TeamID=2},
                 new Player(){Name="Arany Gergely",Id=6,Age=26,PlayerSalary=1500000,Position="GoalTender",TeamID=2},
             };
+
+            modelBuilder.Entity<Team>().HasData(teams);
             modelBuilder.Entity<Player>().HasData(players);
             
         }
