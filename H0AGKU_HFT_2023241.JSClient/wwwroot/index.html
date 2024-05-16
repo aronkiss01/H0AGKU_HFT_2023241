@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Player </title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <a href="index.html">Player</a>
+        <a href="team.html">Team</a>
+        <a href="league.html">League</a>
+        <a href="nonCruds.html">NonCruds </a>
+    </header>
+    <h1>Player Catalog</h1>
+    <h3>Create</h3>
+    <div id="fordiv">
+        <label>Player name</label>
+        <input type="text" id="playername" />
+        <label>Age</label>
+        <input type="number" id="age" />               
+        <label>Player Salary</label>
+        <input type="number" id="playersalary" />
+        <button type="button" onclick="create()">Add Player</button>
+    </div>
+    <h3>Update</h3>
+    <div id="updateformdiv">
+        <label>Player name</label>
+        <input type="text" id="playernameupdate" />
+        <label>Age</label>
+        <input type="number" id="ageupdate" />     
+        <label>Player salary</label>
+        <input type="number" id="playersupdate" />
+        <button type="button" onclick="update()">Update Player</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Player Salary</th>              
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+        </tbody>
+    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

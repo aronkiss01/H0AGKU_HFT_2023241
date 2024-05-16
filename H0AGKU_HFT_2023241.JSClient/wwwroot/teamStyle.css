@@ -1,0 +1,61 @@
+﻿body {
+}
+
+table {
+    width: 70%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 5px;
+}
+
+th {
+    background-color: lightblue;
+}
+
+/*#formdiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}*/
+
+#fordiv label, button, input {
+    margin: 10px;
+    padding: 7px;
+}
+
+#fordiv label {
+    font-weight: bolder;
+}
+
+table button {
+    padding: 2px;
+}
+
+header {
+    background-color: lightblue;
+    height: 25px;
+    border: 2px solid black;
+    height: 40px;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+    header a {
+        font-size: 20px;
+        margin-right: 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: black;
+        margin: 10px;
+    }
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+}

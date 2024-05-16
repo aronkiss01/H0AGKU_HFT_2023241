@@ -1,3 +1,4 @@
+using H0AGKU_HFT_2023241.Endpoint.Services;
 using H0AGKU_HFT_2023241.Logic;
 using H0AGKU_HFT_2023241.Models;
 using H0AGKU_HFT_2023241.Repository;
@@ -37,12 +38,14 @@ namespace H0AGKU_HFT_2023241.Endpoint
             services.AddTransient<ITeamLogic, TeamLogic>();
             services.AddTransient<ILeagueLogic, LeagueLogic>();
 
+            services.AddSignalR();
+
             services.AddControllers();
-            services.AddSwaggerGen(c => 
-            { 
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "H0AGKU_HFT_2023241.Endpoint", Version = "v1" }); 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "H0AGKU_HFT_2023241.Endpoint", Version = "v1" });
             });
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,8 +60,22 @@ namespace H0AGKU_HFT_2023241.Endpoint
 
             app.UseRouting();
 
-           app.UseAuthentication();
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseCors(x => x
+           .AllowCredentials()
+           .AllowAnyMethod()
+           .AllowAnyHeader()
+           .WithOrigins("http://localhost:50259"));
+
+            
+
+            app.UseAuthentication();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
+
+            });
+
         }
     }
 }

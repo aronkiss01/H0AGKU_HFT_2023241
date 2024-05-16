@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>League </title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <a href="index.html">Player</a>
+        <a href="league.html">League</a>
+        <a href="team.html">Team</a>
+        <a href="nonCruds.html">NonCruds</a>
+    </header>
+    <h1>League Catalog</h1>
+    <h3>Create</h3>
+    <div id="formdiv">
+        <label>League Name</label>
+        <input type="text" id="lname" />       
+        <label> Country</label>
+        <input type="text" id="country" />
+        <button type="button" onclick="create()">Add League</button>
+    </div>
+    <h3>Update</h3>
+    <div id="updateformdiv">
+        <label>League Name</label>
+        <input type="text" id="lnameupdate" />       
+        <label> Country</label>
+        <input type="text" id="countryupdate" />
+        <button type="button" onclick="update()">Update League</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>               
+                <th>Name</th>              
+                <th>Country</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+        </tbody>
+    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="leagueScript.js"></script>
+</body>
+</html>

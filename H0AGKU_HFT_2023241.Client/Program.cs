@@ -55,7 +55,7 @@ namespace H0AGKU_HFT_2023241.Client
                 string Lcountry = Console.ReadLine();
                 Console.Write("League has VAR? (true/false): ");
                 bool hasVar = bool.Parse(Console.ReadLine());
-                RestService.Post(new League() {LeagueName = Lname, Country = Lcountry, HasVar = hasVar }, "league");
+                RestService.Post(new League() {Name = Lname, Country = Lcountry, HasVar = hasVar }, "league");
 
             }
             else if (entity == "Player")
@@ -94,9 +94,9 @@ namespace H0AGKU_HFT_2023241.Client
                 Console.WriteLine("Enter the League ID to modify: ");
                 int id = int.Parse(Console.ReadLine());
                 League league = RestService.Get<League>(id, "league");
-                Console.WriteLine($"Old name:{league.LeagueName} new name: ");
+                Console.WriteLine($"Old name:{league.Name} new name: ");
                 string newName = Console.ReadLine();
-                league.LeagueName = newName;
+                league.Name = newName;
                 RestService.Put(league, "league");
 
             }
@@ -190,7 +190,7 @@ namespace H0AGKU_HFT_2023241.Client
                 List<League> leagues = RestService.Get<League>("league");
                 foreach (var item in leagues)
                 {
-                    Console.WriteLine("(" + item.Id + ")" + item.LeagueName);
+                    Console.WriteLine("(" + item.Id + ")" + item.Name);
                 }
             }
             else if (entity == "Player")

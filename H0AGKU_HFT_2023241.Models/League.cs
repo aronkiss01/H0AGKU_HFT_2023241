@@ -10,7 +10,7 @@ namespace H0AGKU_HFT_2023241.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string LeagueName { get; set; }
+        public string Name { get; set; }
         public string Country { get; set; }
         public bool HasVar { get; set; }
         [NotMapped]
@@ -23,7 +23,7 @@ namespace H0AGKU_HFT_2023241.Models
         public League(int id, string leagueName, string country, bool hasVar)
         {
             Id = id;
-            LeagueName = leagueName;
+            Name = leagueName;
             Country = country;
             HasVar = hasVar;
         }

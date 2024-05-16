@@ -37,9 +37,9 @@ namespace H0AGKU_HFT_2023241.Repository
 
             var leagues = new List<League>()
             {
-                new League(){Id=1,LeagueName="National Hockey League",Country="USA,Canada",HasVar=true},
-                new League(){Id=2,LeagueName="Erste Liga",Country="Hungary",HasVar=false},
-                new League(){Id=3,LeagueName="DEL Bundesliga",Country="Germany",HasVar=true}
+                new League(){Id=1,Name="National Hockey League",Country="USA,Canada",HasVar=true},
+                new League(){Id=2,Name="Erste Liga",Country="Hungary",HasVar=false},
+                new League(){Id=3,Name="DEL Bundesliga",Country="Germany",HasVar=true}
             };
             modelBuilder.Entity<League>().HasData(leagues);
 
